@@ -24,7 +24,7 @@ class UserController extends Controller
             'sexe' => 'masculin', 
             'role' => 'administrateur',
             'email' => 'admin@example.com',
-            'password' => Hash::make('password123'), // Hashage du mot de passe
+            'password' => Hash::make('password123'),
         ]);
 
         return response()->json('Compte admin créé avec succès', 201); // Code de réponse HTTP 201
