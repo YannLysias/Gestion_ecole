@@ -18,3 +18,7 @@ Route::middleware([
 
 });
 Route::get('/creer_admin',[UserController::class, 'creer_admin']);
+
+Route::get('/{any}', function () {
+    return view('react');
+})->where('any', '.*');
