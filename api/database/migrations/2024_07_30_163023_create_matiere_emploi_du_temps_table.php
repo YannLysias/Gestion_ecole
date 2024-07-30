@@ -12,14 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('matiere_emploi_du_temps', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('matiere_id');
-            $table->unsignedBigInteger('emploi_du_temps_id');
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('matiere_id')->index('matiere_emploi_du_temps_matiere_id_foreign');
+            $table->unsignedBigInteger('emploi_du_temps_id')->index('matiere_emploi_du_temps_emploi_du_temps_id_foreign');
             $table->timestamps();
-
-             // Clés étrangères
-             $table->foreign('matiere_id')->references('id')->on('matieres')->onDelete('cascade');
-             $table->foreign('emploi_du_temps_id')->references('id')->on('emploi_du_temps')->onDelete('cascade');
         });
     }
 

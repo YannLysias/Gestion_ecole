@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('utilisateurs', function (Blueprint $table) {
-            $table->id();
-            $table->string('telephone');
-            $table->string('statut');
-            $table->foreignId('user_id')->constrained();
+        Schema::create('annee_scolaires', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('annee');
+            $table->string('type');
+            $table->boolean('statut')->default(false);
             $table->timestamps();
         });
     }
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('utilisateurs');
+        Schema::dropIfExists('annee_scolaires');
     }
 };

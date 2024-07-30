@@ -12,17 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('classe_salle', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('classe_id');
-            $table->unsignedBigInteger('salle_id');
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('classe_id')->index('classe_salle_classe_id_foreign');
+            $table->unsignedBigInteger('salle_id')->index('classe_salle_salle_id_foreign');
             $table->timestamps();
-
-             // Clés étrangères
-             $table->foreign('classe_id')->references('id')->on('classes')->onDelete('cascade');
-             $table->foreign('salle_id')->references('id')->on('salles')->onDelete('cascade');
         });
-
-
     }
 
     /**

@@ -11,11 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('absences', function (Blueprint $table) {
-            $table->id();
-            $table->date('date');
-            $table->foreignId('eleve_id')->constrained();
-            $table->foreignId('matiere_id')->constrained();
+        Schema::create('tuteurs', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('telephone');
+            $table->unsignedBigInteger('user_id')->index('tuteurs_user_id_foreign');
             $table->timestamps();
         });
     }
@@ -25,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('absences');
+        Schema::dropIfExists('tuteurs');
     }
 };

@@ -11,10 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('jours', function (Blueprint $table) {
-            $table->id();
-            $table->string('libelle');
-            $table->timestamps();
+        Schema::table('notes', function (Blueprint $table) {
+            $table->foreign(['matiere_id'])->references(['id'])->on('matieres')->onUpdate('restrict')->onDelete('restrict');
         });
     }
 
@@ -23,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('jours');
+        Schema::table('notes', function (Blueprint $table) {
+            $table->dropForeign('notes_matiere_id_foreign');
+        });
     }
 };

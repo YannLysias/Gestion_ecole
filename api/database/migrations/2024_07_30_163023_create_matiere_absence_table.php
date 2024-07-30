@@ -11,12 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('emploi_du_temps', function (Blueprint $table) {
-            $table->id();
-            $table->time('heure_debut');
-            $table->time('heure_fin');
-            $table->foreignId('classe_id')->constrained();
-            $table->foreignId('annee_scolaire_id')->constrained();
+        Schema::create('matiere_absence', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('matiere_id')->index('matiere_absence_matiere_id_foreign');
+            $table->unsignedBigInteger('absence_id')->index('matiere_absence_absence_id_foreign');
             $table->timestamps();
         });
     }
@@ -26,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('emploi_du_temps');
+        Schema::dropIfExists('matiere_absence');
     }
 };
