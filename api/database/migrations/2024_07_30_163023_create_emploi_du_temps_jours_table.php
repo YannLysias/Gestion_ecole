@@ -11,9 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('droits', function (Blueprint $table) {
-            $table->id();
-            $table->string('libelle');
+        Schema::create('emploi_du_temps_jours', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('emploi_du_temps_id')->index('emploi_du_temps_jours_emploi_du_temps_id_foreign');
+            $table->unsignedBigInteger('jour_id')->index('emploi_du_temps_jours_jour_id_foreign');
             $table->timestamps();
         });
     }
@@ -23,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('droits');
+        Schema::dropIfExists('emploi_du_temps_jours');
     }
 };

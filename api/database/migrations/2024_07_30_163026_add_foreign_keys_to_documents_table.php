@@ -11,11 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tuteurs', function (Blueprint $table) {
-            $table->id();
-            $table->string('telephone');
-            $table->foreignId('user_id')->constrained();
-            $table->timestamps();
+        Schema::table('documents', function (Blueprint $table) {
+            $table->foreign(['user_id'])->references(['id'])->on('users')->onUpdate('restrict')->onDelete('restrict');
         });
     }
 
@@ -24,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('tuteurs');
+        Schema::table('documents', function (Blueprint $table) {
+            $table->dropForeign('documents_user_id_foreign');
+        });
     }
 };

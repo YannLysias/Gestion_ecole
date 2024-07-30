@@ -11,11 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('notes', function (Blueprint $table) {
-            $table->id();
-            $table->string('note');
-            $table->foreignId('eleve_id')->constrained();
-            $table->foreignId('matiere_id')->constrained();
+        Schema::create('etablissements', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('nom');
+            $table->string('logo');
+            $table->string('contact');
+            $table->string('adresse');
+            $table->string('email');
+            $table->string('telephone');
             $table->timestamps();
         });
     }
@@ -25,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('notes');
+        Schema::dropIfExists('etablissements');
     }
 };

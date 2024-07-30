@@ -12,17 +12,16 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('eleves', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
             $table->string('matricule');
             $table->integer('edu_master');
             $table->date('date_naissance');
             $table->string('lieu_naissance');
             $table->boolean('statut')->default(false);
             $table->string('photo');
-
-            $table->foreignId('tuteur_id')->constrained();
-            $table->foreignId('classe_id')->constrained();
+            $table->integer('tuteur_id')->index('tuteur_id');
             $table->timestamps();
+            $table->integer('classe_id')->index('classe_id');
         });
     }
 

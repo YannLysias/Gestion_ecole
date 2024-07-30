@@ -11,11 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('documents', function (Blueprint $table) {
-            $table->id();
-            $table->string('type');
-            $table->foreignId('user_id')->constrained();
+        Schema::create('emploi_du_temps', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->time('heure_debut');
+            $table->time('heure_fin');
             $table->timestamps();
+            $table->integer('classe_id')->index('classe_id');
+            $table->integer('annee_scolaire_id')->index('annee_scolaire_id');
         });
     }
 
@@ -24,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('documents');
+        Schema::dropIfExists('emploi_du_temps');
     }
 };
