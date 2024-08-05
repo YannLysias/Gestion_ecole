@@ -27,15 +27,19 @@ class RegisteredUserController extends Controller
         $request->validate([
             'nom' => ['required', 'string', 'max:255'],
             'prenom' => ['required', 'string', 'max:255'],
-            'sexe' => ['required', 'string','in:masculin,féminin' ,'max:15'],
-            'role' => ['required', 'string','in:admin,tuteur' ,'max:15'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
+            'sexe' => ['required', 'string', 'in:masculin,féminin', 'max:15'],
+            'role' => ['required', 'string', 'in:admin,tuteur', 'max:15'],
+            'email' => ['string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
+
+        
+
 
         $user = User::create([
             'nom' => $request->nom,
             'prenom' => $request->prenom,
+            'user_name' => strtolower(trim($request->nom)) . strtolower(trim($request->nom)) . substr(time(), -4),
             'sexe' => $request->sexe,
             'role' => $request->role,
             'email' => $request->email,
@@ -44,8 +48,6 @@ class RegisteredUserController extends Controller
 
 
         event(new Registered($user));
-
-        Auth::login($user);
 
         // Return a response with the created user
         return response()->json([
