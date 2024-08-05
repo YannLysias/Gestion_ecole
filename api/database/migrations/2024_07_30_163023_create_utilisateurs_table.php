@@ -15,7 +15,7 @@ return new class extends Migration
             $table->bigIncrements('id');
             $table->string('telephone');
             $table->string('statut');
-            $table->unsignedBigInteger('user_id')->index('utilisateurs_user_id_foreign');
+            $table->unsignedBigInteger('user_id')->index('utilisateurs_user_id_foreign')->unique();
             $table->timestamps();
         });
     }
