@@ -28,7 +28,7 @@ class RegisteredUserController extends Controller
             'nom' => ['required', 'string', 'max:255'],
             'prenom' => ['required', 'string', 'max:255'],
             'sexe' => ['required', 'string','in:masculin,féminin' ,'max:15'],
-            'role' => ['required', 'string','in:admin,eleve,parent' ,'max:15'],
+            'role' => ['required', 'string','in:admin,tuteur' ,'max:15'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
@@ -47,8 +47,10 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        return response(['user'=>$user]);
-
-        return response()->noContent();
+        // Return a response with the created user
+        return response()->json([
+            'user' => $user,
+            'message' => 'Compte créé avec succès'
+        ], 201);
     }
 }
