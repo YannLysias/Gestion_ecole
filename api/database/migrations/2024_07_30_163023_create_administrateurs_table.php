@@ -11,10 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('utilisateur_droit', function (Blueprint $table) {
+        Schema::create('administrateurs', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('utilisateur_id')->index('utilisateur_droit_utilisateur_id_foreign');
-            $table->unsignedBigInteger('droit_id')->index('utilisateur_droit_droit_id_foreign');
+            $table->unsignedBigInteger('user_id')->index('utilisateurs_user_id_foreign');
             $table->timestamps();
         });
     }
@@ -24,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('utilisateur_droit');
+        Schema::dropIfExists('administrateurs');
     }
 };
