@@ -13,8 +13,7 @@ return new class extends Migration
     {
         Schema::create('tuteurs', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('telephone');
-            $table->unsignedBigInteger('user_id')->unique();
+            $table->unsignedBigInteger('user_id');
             $table->timestamps();
         });
     }

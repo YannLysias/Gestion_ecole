@@ -10,7 +10,11 @@ class Administrateur extends Model
     use HasFactory;
 
     public function user()
-{
-    return $this->belongsTo(User::class, 'user_id');
-}
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+    
+    protected $guarded = [];
+
+    protected $table = 'utilisateurs';
 }

@@ -13,9 +13,7 @@ return new class extends Migration
     {
         Schema::create('administrateurs', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('telephone');
-            $table->string('statut');
-            $table->unsignedBigInteger('user_id')->index('administrateurs_user_id_foreign')->unique();
+            $table->unsignedBigInteger('user_id')->index('utilisateurs_user_id_foreign');
             $table->timestamps();
         });
     }
