@@ -57,6 +57,7 @@ class RegisteredUserController extends Controller
                 'user_name' => 'Gkpedjo0229',
                 'email' => 'gkpedjo@gmail.com',
                 'password' => 'original22',
+
             ]);
         }
 
