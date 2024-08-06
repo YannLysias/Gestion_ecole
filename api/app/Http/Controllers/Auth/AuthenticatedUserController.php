@@ -13,7 +13,7 @@ class AuthenticatedUserController extends Controller
     /**
      * Handle an incoming authentication request.
      */
-    public function store(LoginRequest $request): Response
+    public function store(LoginRequest $request): JsonResponse
     {
 
         // Validate and authenticate the user

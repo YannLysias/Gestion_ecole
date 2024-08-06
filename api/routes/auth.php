@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Auth\AuthenticatedUserController;
 use App\Http\Controllers\Auth\EmailVerificationNotificationController;
 use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
@@ -13,7 +13,7 @@ Route::post('register', [RegisteredUserController::class, 'store'])
                  ->middleware('guest')
                 ->name('register');
 
-Route::post('login', [AuthenticatedSessionController::class, 'store'])
+Route::post('login', [AuthenticatedUserController::class, 'store'])
                 ->middleware('guest')
                 ->name('login');
 
@@ -33,7 +33,7 @@ Route::post('email/verification-notification', [EmailVerificationNotificationCon
                 ->middleware(['auth', 'throttle:6,1'])
                 ->name('verification.send');
 
-Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
+Route::post('logout', [AuthenticatedUserController::class, 'destroy'])
                 ->middleware('auth')
                 ->name('logout');
 
