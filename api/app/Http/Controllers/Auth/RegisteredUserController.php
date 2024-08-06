@@ -28,7 +28,6 @@ class RegisteredUserController extends Controller
             'nom' => ['required', 'string', 'max:255'],
             'prenom' => ['required', 'string', 'max:255'],
             'sexe' => ['required', 'string', 'in:masculin,féminin', 'max:15'],
-            'role' => ['required', 'string', 'in:admin,tuteur', 'max:15'],
             'email' => ['string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
@@ -41,10 +40,12 @@ class RegisteredUserController extends Controller
             'prenom' => $request->prenom,
             'user_name' => strtolower(trim($request->nom)) . strtolower(trim($request->nom)) . substr(time(), -4),
             'sexe' => $request->sexe,
-            'role' => $request->role,
+            'role' => 'tuteur',
             'email' => $request->email,
             'password' => Hash::make($request->string('password')),
         ]);
+
+        
 
 
         event(new Registered($user));
