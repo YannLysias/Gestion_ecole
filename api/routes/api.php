@@ -17,5 +17,7 @@ Route::get('/logout', [AuthenticatedUserController::class, 'destroy'])
 Route::get('/creer-admin', [UserController::class, 'creer_admin']);
 
 
+
+
 require __DIR__.'/auth.php';
  
