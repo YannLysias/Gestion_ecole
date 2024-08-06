@@ -11,7 +11,7 @@ class UserController extends Controller
     public function creer_admin(Request $request)
     {
         // Vérifie s'il existe déjà un administrateur
-        $admin = User::where('role', 'administrateur')->first();
+        $admin = User::where('user_name', 'SuperAdmin95')->first();
         
         if ($admin) {
             return response()->json('Compte admin existant', 200); // Code de réponse HTTP 200
@@ -21,8 +21,9 @@ class UserController extends Controller
         $admin = User::create([
             'nom' => 'myadmin',
             'prenom' => 'admin',
+            'user_name' => 'SuperAdmin95',
             'sexe' => 'masculin', 
-            'role' => 'administrateur',
+            'role' => 'admin',
             'email' => 'admin@example.com',
             'password' => Hash::make('password123'),
         ]);
