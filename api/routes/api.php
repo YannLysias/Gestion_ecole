@@ -9,15 +9,7 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('/login', [AuthenticatedUserController::class, 'store']);
-
-Route::get('/logout', [AuthenticatedUserController::class, 'destroy'])
-    ->middleware('auth:sanctum');
-
-Route::get('/creer-admin', [UserController::class, 'creer_admin']);
-
-
-
+ 
 
 require __DIR__.'/auth.php';
  

@@ -6,12 +6,14 @@ use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
-use Illuminate\Http\Request as HttpRequest;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+
+Route::get('creer-admin', [UserController::class, 'creer_admin']);
 
 Route::post('register', [RegisteredUserController::class, 'store'])
                  ->middleware('guest')
-                ->name('register');
+                ->name('register')->middleware('role:admin');;
 
 Route::post('login', [AuthenticatedUserController::class, 'store'])
                 ->middleware('guest')
@@ -34,12 +36,6 @@ Route::post('email/verification-notification', [EmailVerificationNotificationCon
                 ->name('verification.send');
 
 Route::post('logout', [AuthenticatedUserController::class, 'destroy'])
-                ->middleware('auth')
+                ->middleware('auth:sanctum')
                 ->name('logout');
 
-
-                Route::post('/reverse-me', function (HttpRequest $request) {
-                    $reversed = strrev($request->input('reverse_this'));
-                    return $reversed;
-                  });
-                
