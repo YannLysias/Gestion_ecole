@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('annee_scolaires', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('annee');
-            $table->string('type');
-            $table->boolean('statut')->default(false);
+            $table->emun('type',['semestriel','trimestriel'])->default('trimestriel');
+            $table->boolean('statut')->default(true);
             $table->timestamps();
         });
     }

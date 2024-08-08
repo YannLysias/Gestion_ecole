@@ -23,11 +23,15 @@ class UserController extends Controller
             'prenom' => 'admin',
             'user_name' => 'SuperAdmin95',
             'sexe' => 'masculin', 
-            'role' => 'admin',
+            'telephone' => '97002034', 
             'email' => 'admin@example.com',
             'password' => Hash::make('password123'),
         ]);
 
+        $admin->assignRole('admin');
+
         return response()->json('Compte admin créé avec succès', 201); // Code de réponse HTTP 201
     }
 }
+
+
