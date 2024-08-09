@@ -13,61 +13,65 @@ class TuteurController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index():JsonResponse
+    public function index(): JsonResponse
     {
-        //TODO
-        /**
-         * request to get all parent with there childreen and there user info
-         */
-
-        $tuteurs = Tuteur::with('users')->get();
-         
-         return response()->json(["tuteurs"=>$tuteurs],200);
+        // Récupérer tous les Tuteurs avec leurs utilisateurs associés
+        $tuteurs = Tuteur::with('user')->get();
+        
+        return response()->json(['tuteurs' => $tuteurs], Response::HTTP_OK);
     }
-
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id):JsonResponse
+    public function show(string $id): JsonResponse
     {
-        //TODO
-         /**
-         * request to get a single parent with his childreen and  user info
-         */
-        $user = Tuteur::with('users')->find($id);
+        // Récupérer un seul Tuteur avec son utilisateur associé
+        $tuteur = Tuteur::with('user')->find($id); 
 
-        return response()->json(["user"=>$user],200);
+        if ($tuteur === null) {
+            return response()->json(['message' => 'Tuteur non trouvé'], Response::HTTP_NOT_FOUND);
+        }
+
+        return response()->json(['tuteur' => $tuteur], Response::HTTP_OK);
     }
 
- 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id):JsonResponse
+    public function update(Request $request, string $id): JsonResponse
     {
-        //TODO
+        // Valider les données de la requête
         $request->validate([
             'nom' => ['required', 'string', 'max:255'],
             'prenom' => ['required', 'string', 'max:255'],
             'telephone' => ['required', 'string', 'max:255'],
             'sexe' => ['required', 'string', 'in:masculin,féminin', 'max:15'],
-            'email' => ['string', 'lowercase', 'email', 'max:255', ]
+            'email' => ['nullable', 'string', 'lowercase', 'email', 'max:255']
         ]);
 
-        $affectedRow = User::where('id',$id)->update([
+        // Trouver le Tuteur et l'utilisateur associé
+        $tuteur = Tuteur::find($id);
+
+        if ($tuteur === null) {
+            return response()->json(['message' => 'Tuteur non trouvé'], Response::HTTP_NOT_FOUND);
+        }
+
+        // Mettre à jour le modèle User associé
+        $user = $tuteur->user; 
+
+        if ($user === null) {
+            return response()->json(['message' => 'Utilisateur associé au Tuteur non trouvé'], Response::HTTP_NOT_FOUND);
+        }
+
+        $user->update([
             'nom' => $request->nom,
             'prenom' => $request->prenom,
             'telephone' => $request->telephone,
             'sexe' => $request->sexe,
-            'email' => $request->email ? $request->email : null,
+            'email' => $request->email
         ]);
 
-        if ($affectedRow === 0) {
-            return response()->json(["message"=>"No user found with the specified ID"],Response::HTTP_NOT_FOUND);
-        }
-
-        return response()->json(['message' => 'User updated successfully.'], Response::HTTP_OK); 
+        return response()->json(['message' => 'Utilisateur mis à jour avec succès.'], Response::HTTP_OK);
     }
-
 }

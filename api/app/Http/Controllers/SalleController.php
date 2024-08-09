@@ -12,22 +12,19 @@ class SalleController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index():JsonResponse
+    public function index(): JsonResponse
     {
-        //TODO
-
-        $classes = Salle::with('classes')->get();
+        // Get all salles with their associated classes
+        $salles = Salle::with('classes')->get();
          
-         return response()->json(["classes"=>$classes],200);
+        return response()->json(['salles' => $salles], Response::HTTP_OK);
     }
-
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request):JsonResponse
+    public function store(Request $request): JsonResponse
     {
-        //TODO
         $request->validate([
             'nom' => ['required', 'string', 'max:30'],
         ]);
@@ -38,50 +35,44 @@ class SalleController extends Controller
 
         return response()->json([
             'salle' => $salle,
-            'message' => 'Nouvelle salle creer',
-            'success'=>true
-        ], 201);
+            'message' => 'Nouvelle salle créée',
+            'success' => true
+        ], Response::HTTP_CREATED);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $id): JsonResponse
     {
-        //TODO
-        
         $salle = Salle::with('classes')->find($id);
 
-        if ($salle == null) {
-            return response()->json(["message"=>"Salle introuvable"],Response::HTTP_NOT_FOUND);
+        if ($salle === null) {
+            return response()->json(['message' => 'Salle introuvable'], Response::HTTP_NOT_FOUND);
         }
 
-        return response()->json(["salle"=>$salle],200);
-
+        return response()->json(['salle' => $salle], Response::HTTP_OK);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id):JSONResponse
+    public function update(Request $request, string $id): JsonResponse
     {
-        //TODO
         $request->validate([
             'nom' => ['required', 'string', 'max:30'],
         ]);
 
-        $affectedRow = Salle::where('id',$id)->update([
+        $salle = Salle::find($id);
+
+        if ($salle === null) {
+            return response()->json(['message' => 'Salle introuvable'], Response::HTTP_NOT_FOUND);
+        }
+
+        $salle->update([
             'nom' => $request->nom,
         ]);
 
-        if ($affectedRow === 0) {
-            return response()->json(["message"=>"Salle introuvable"],Response::HTTP_NOT_FOUND);
-        }
-
-        return response()->json(['message' => 'Salle mise a jour avec succes.'], Response::HTTP_OK); 
+        return response()->json(['message' => 'Salle mise à jour avec succès.'], Response::HTTP_OK);
     }
-
-
-
-
 }
