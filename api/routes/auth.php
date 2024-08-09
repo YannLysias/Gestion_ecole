@@ -13,7 +13,7 @@ Route::get('creer-admin', [UserController::class, 'creer_admin']);
 
 Route::post('register', [RegisteredUserController::class, 'store'])
                  ->middleware('guest')
-                ->name('register')->middleware('role:admin');;
+                ->name('register')->middleware('role:admin');
 
 Route::post('login', [AuthenticatedUserController::class, 'store'])
                 ->middleware('guest')
