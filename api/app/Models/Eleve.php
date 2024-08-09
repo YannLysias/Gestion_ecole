@@ -8,4 +8,17 @@ use Illuminate\Database\Eloquent\Model;
 class Eleve extends Model
 {
     use HasFactory;
+
+    protected $guarded = [];
+    protected $table = 'eleves';
+
+    public function notes()
+    {
+        return $this->HasMany(Note::class); 
+    }
+
+    public function absences()
+    {
+        return $this->HasMany(Absence::class); 
+    }
 }

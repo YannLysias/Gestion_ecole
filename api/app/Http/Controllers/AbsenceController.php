@@ -32,22 +32,24 @@ class AbsenceController extends Controller
         $request->validate([
             'matiere_id' => 'required|exists:matieres,id',
             'classe_id' => 'required|exists:classes,id',
+            'eleve_id' => 'required|exists:eleves,id',
             'date' => 'required|date',
         ]);
 
         $absence = Absence::create([
             'matiere_id' => $request->matiere_id,
             'classe_id' => $request->classe_id,
+            'eleve_id' => $request->eleve_id,
             'date' => $request->date,
         ]);
 
-        return response()->json("Un absence a été ajouté avec succès");
+        return response()->json('success', "Un absence a été ajouté avec succès");
     }
 
     /**
      * Display the specified resource.
      */
-    
+
     public function show(string $id)
     {
         $absence = Absence::with(['matiere', 'classe'])->findOrFail($id);
@@ -74,18 +76,24 @@ class AbsenceController extends Controller
             'date' => 'required|date',
         ]);
 
-        $absence = Absence::create([
-            'matiere_id' => $request->matiere_id,
-            'classe_id' => $request->classe_id,
-            'date' => $request->date,
-        ]);
-    }
+        $absence = Absence::where('id', (int) $id)->first();
+
+            $absence ->matiere_id = $request->matiere_id;
+            $absence ->classe_id= $request->classe_id;
+            $absence ->date = $request->date;
+
+            $absence->save();
+
+        return response()->json('success', 'Modification effectué avec success');
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)
     {
-        //
+        $absence = Absence::findOrFail($id);
+        $absence->delete();
+
+        return redirect()->back()->with('success', 'L\'absence a été supprimé avec succès.');
     }
 }

@@ -13,7 +13,11 @@ class EleveController extends Controller
      */
     public function index()
     {
-        //
+        $eleves = Eleve::all();
+
+        return view('eleve', [
+            'eleves' => $eleves,
+        ]);
     }
 
     /**
@@ -67,7 +71,7 @@ class EleveController extends Controller
             'tuteur_id' => $request->tuteur_id,
         ]);
 
-        return response()->json('Compte éleve créé avec succès', 201);
+        return response()->json('success', 'Compte éleve créé avec succès', 201);
     }
 
     /**

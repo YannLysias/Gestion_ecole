@@ -78,6 +78,8 @@ class NoteController extends Controller
             $note ->eleve_id = $request->eleve_id;
 
             $note->save();
+
+            return response()->json('success', 'Modification effectué avec success');
     }
 
     /**
