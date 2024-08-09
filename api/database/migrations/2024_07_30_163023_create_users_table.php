@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('prenom');
             $table->string('sexe');
             $table->string('telephone');
+            $table->string('adresse');
             $table->boolean('statut')->default(true);
             $table->string('email')->unique()->nullable();
             $table->timestamp('email_verified_at')->nullable();

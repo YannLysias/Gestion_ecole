@@ -15,8 +15,11 @@ return new class extends Migration
             $table->bigIncrements('id');
             $table->string('matricule');
             $table->integer('edu_master');
+            $table->string('nom');
+            $table->string('prenom');
             $table->date('date_naissance');
             $table->string('lieu_naissance');
+            $table->string('adresse');
             $table->boolean('statut')->default(false);
             $table->unsignedBigInteger('tuteur_id');
             $table->unsignedBigInteger('classe_id');
@@ -24,7 +27,7 @@ return new class extends Migration
         });
     }
 
-    /** 
+    /**
      * Reverse the migrations.
      */
     public function down(): void

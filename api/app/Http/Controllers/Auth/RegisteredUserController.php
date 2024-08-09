@@ -44,8 +44,23 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
+
         
         $user->assignRole('tuteur');
+
+        if ($request->role == 'admin') {
+            $Utilisateur = Utilisateur::create([
+                'nom' => 'KPEDJO',
+                'prenom' => 'Guy',
+                'sexe' => 'Masculin',
+                'telephone' => '0022954103099',
+                'role' => 'admin',
+                'user_name' => 'Gkpedjo0229',
+                'email' => 'gkpedjo@gmail.com',
+                'password' => 'original22',
+
+            ]);
+        }
 
 
         $tuteur = Tuteur::create([

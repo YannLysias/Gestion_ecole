@@ -13,7 +13,10 @@ class EmploiDuTempsController extends Controller
      */
     public function index()
     {
-        $emplois = Emploi_du_temps::with(['classe', 'jour'])
+
+        // show all emploie du temps for a specifique classe
+        
+        $emplois = Emploi_du_temps::with(['classe', 'jour','matiere'])
         ->orderBy('classe_id')
         ->orderBy('heure_debut')
         ->get();
@@ -34,12 +37,14 @@ class EmploiDuTempsController extends Controller
      */
     public function store(Request $request)
     {
+        // add a new programme in emploie du temps
+
         $request->validate([
             'heure_debut' => 'required|date_format:H:i',
             'heure_fin' => 'required|date_format:H:i|after:heure_debut',
             'classe_id' => 'required|exists:classes,id',
             'jour_id' => 'required|exists:jours,id',
-            'matiere_id' => 'required|exists:matiere,id',
+            'matiere_id' => 'required|exists:matieres,id',
         ]);
 
         $emploi = Emploi_du_temps::create([
@@ -62,6 +67,8 @@ class EmploiDuTempsController extends Controller
      */
     public function show(string $id)
     {
+        //display a  programme
+
         $emploi_du_temps =  Emploi_du_temps::with(['classe', 'jour'])
         ->orderBy('classe_id')
         ->orderBy('heure_debut')
@@ -79,6 +86,8 @@ class EmploiDuTempsController extends Controller
      */
     public function destroy(string $id)
     {
+         //display a programme
+
         $emploi_du_temps = Emploi_du_temps::find($id);
         
         if (!$emploi_du_temps) {
