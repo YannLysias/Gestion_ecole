@@ -5,12 +5,8 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\Tuteur;
 use App\Models\User;
-use App\Models\Utilisateur;
 use Illuminate\Auth\Events\Registered;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 
@@ -49,7 +45,7 @@ class RegisteredUserController extends Controller
         $user->assignRole('tuteur');
 
         if ($request->role == 'admin') {
-            $Utilisateur = Utilisateur::create([
+            $Utilisateur = User::create([
                 'nom' => 'KPEDJO',
                 'prenom' => 'Guy',
                 'sexe' => 'Masculin',

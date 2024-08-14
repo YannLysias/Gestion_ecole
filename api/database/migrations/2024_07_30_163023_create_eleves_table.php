@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('eleves', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('matricule');
+            $table->string('user_name');
             $table->integer('edu_master');
             $table->string('nom');
             $table->string('prenom');

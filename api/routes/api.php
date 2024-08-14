@@ -38,9 +38,11 @@ Route::post('users/{id}/toggleStatus', [ToggleStatus::class, 'toggleUserStatus']
 Route::post('salles/linksalletoclasse', [SalleClasseController::class, 'linkSalleToClasse']);
 
 Route::apiResource('eleve', EleveController::class);
-Route::apiResource('note', NoteController::class);
-Route::apiResource('matiere', MatiereController::class);
-Route::apiResource('absence', AbsenceController::class);
 
+Route::apiResource('note', NoteController::class);
+
+Route::apiResource('matiere', MatiereController::class);
+
+Route::apiResource('absence', AbsenceController::class);
 
 require __DIR__.'/auth.php';

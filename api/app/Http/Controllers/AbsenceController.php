@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Absence;
 use Illuminate\Http\Request;
 
 class AbsenceController extends Controller
@@ -85,10 +86,12 @@ class AbsenceController extends Controller
             $absence->save();
 
         return response()->json('success', 'Modification effectué avec success');
+        }
 
     /**
      * Remove the specified resource from storage.
      */
+    
     public function destroy(string $id)
     {
         $absence = Absence::findOrFail($id);
