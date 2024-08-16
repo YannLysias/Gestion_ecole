@@ -14,35 +14,48 @@ use App\Http\Controllers\MatiereController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
+Route::get('/user', function (Request $request) {
     return $request->user();
 });
 
 Route::apiResource('tuteurs', TuteurController::class)
     ->only(['index', 'show', 'update']);
+    // ->middleware(['isauth']);
 
 Route::apiResource('admins', AdminController::class) 
-    ->only(['index', 'show', 'update']);
+    ->only(['index', 'show', 'update'])
+    ->middleware(['isauth']);
+
 
 Route::apiResource('annee_scolaires', AnneeScolaireController::class)
-    ->only(['index','store','show', 'update']);
+    ->only(['index','store','show', 'update'])
+    ->middleware(['isauth']);
+
 
 Route::apiResource('classes', ClasseController::class)
-    ->only(['index','store','show', 'update']);
+    ->only(['index','store','show', 'update'])
+    ->middleware(['isauth']);
 
 Route::apiResource('salles', SalleController::class)
-    ->only(['index','store','show', 'update']);
+    ->only(['index','store','show', 'update'])
+    ->middleware(['isauth']);
 
-Route::post('users/{id}/toggleStatus', [ToggleStatus::class, 'toggleUserStatus']);
+Route::post('users/{id}/toggleStatus', [ToggleStatus::class, 'toggleUserStatus'])
+    ->middleware(['isauth','can.togglestatus']);
 
-Route::post('salles/linksalletoclasse', [SalleClasseController::class, 'linkSalleToClasse']);
+Route::post('salles/linksalletoclasse', [SalleClasseController::class, 'linkSalleToClasse'])
+    ->middleware(['isauth','can.linksalletoclasse']);;
 
-Route::apiResource('eleve', EleveController::class);
+Route::apiResource('eleve', EleveController::class)
+    ->middleware(['isauth']);
 
-Route::apiResource('note', NoteController::class);
+Route::apiResource('note', NoteController::class)
+    ->middleware(['isauth']);
 
-Route::apiResource('matiere', MatiereController::class);
+Route::apiResource('matiere', MatiereController::class)
+    ->middleware(['isauth']);
 
-Route::apiResource('absence', AbsenceController::class);
+Route::apiResource('absence', AbsenceController::class)
+    ->middleware(['isauth']);
 
 require __DIR__.'/auth.php';

@@ -4,19 +4,20 @@ use App\Http\Controllers\Auth\AuthenticatedUserController;
 use App\Http\Controllers\Auth\EmailVerificationNotificationController;
 use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
+use App\Http\Controllers\Auth\RegisteredStudentController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('creer-admin', [UserController::class, 'creer_admin'])
-                 ->middleware('auth:admin');   
+Route::get('creer-admin', [UserController::class, 'creer_admin']);
+                  
 Route::post('register', [RegisteredUserController::class, 'store'])
-                 ->middleware('guest')
+                ->middleware('guest')
                 ->name('register');
 
 Route::post('login', [AuthenticatedUserController::class, 'store'])
-                ->middleware('guest')
+                 ->middleware('guest')
                 ->name('login');
 
 Route::post('forgot-password', [PasswordResetLinkController::class, 'store'])

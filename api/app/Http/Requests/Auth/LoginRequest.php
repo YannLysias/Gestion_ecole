@@ -46,7 +46,7 @@ class LoginRequest extends FormRequest
 
         return $isEmail
             ? ['email' => $login, 'password' => $this->input('password')]
-            : ['username' => $login, 'password' => $this->input('password')];
+            : ['user_name' => $login, 'password' => $this->input('password')];
     }
 
     public function ensureIsNotRateLimited(): void

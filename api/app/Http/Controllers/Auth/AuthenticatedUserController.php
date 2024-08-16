@@ -14,8 +14,11 @@ class AuthenticatedUserController extends Controller
      */
    public function store(LoginRequest $request): JsonResponse
     {
+        
         // Use the authenticate method to validate and log in the user
         $request->authenticate();
+        
+        dd($request->user());
 
         // Generate the token after successful authentication
         $token = $request->user()->createToken('User Access Token')->plainTextToken;
