@@ -21,4 +21,9 @@ class Eleve extends Model
     {
         return $this->HasMany(Absence::class); 
     }
+    
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }

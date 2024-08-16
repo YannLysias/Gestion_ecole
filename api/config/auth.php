@@ -41,15 +41,12 @@ return [
         'provider' => 'users',
     ],
 
-    'admin' => [
+    'api' => [
         'driver' => 'sanctum',
         'provider' => 'users',
     ],
 
-    'eleve'=>[
-        'driver'=>'sanctum',
-        'provider'=>'eleves'
-    ] 
+    
 ],
 
     /*
@@ -70,14 +67,10 @@ return [
     */
 
     'providers' => [
+
         'users' => [
             'driver' => 'eloquent',
             'model' => env('AUTH_MODEL', App\Models\User::class),
-        ],
-
-        'eleves' => [
-            'driver' => 'eloquent',
-            'model' => env('AUTH_MODEL', App\Models\Eleve::class),
         ]
 
     ],
