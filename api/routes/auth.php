@@ -9,11 +9,11 @@ use App\Http\Controllers\Auth\VerifyEmailController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('creer-admin', [UserController::class, 'creer_admin']);
-
+Route::get('creer-admin', [UserController::class, 'creer_admin'])
+                 ->middleware('auth:admin');   
 Route::post('register', [RegisteredUserController::class, 'store'])
                  ->middleware('guest')
-                ->name('register')->middleware('role:admin');
+                ->name('register');
 
 Route::post('login', [AuthenticatedUserController::class, 'store'])
                 ->middleware('guest')

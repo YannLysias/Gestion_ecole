@@ -6,7 +6,7 @@ use App\Models\Absence;
 use Illuminate\Http\Request;
 
 class AbsenceController extends Controller
-{
+{ 
     /**
      * Display a listing of the resource.
      */

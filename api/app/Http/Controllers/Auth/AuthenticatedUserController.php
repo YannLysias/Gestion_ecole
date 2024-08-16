@@ -5,7 +5,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 
 class AuthenticatedUserController extends Controller
@@ -13,18 +12,14 @@ class AuthenticatedUserController extends Controller
     /**
      * Handle an incoming authentication request.
      */
-    public function store(LoginRequest $request): JsonResponse
+   public function store(LoginRequest $request): JsonResponse
     {
+        // Use the authenticate method to validate and log in the user
+        $request->authenticate();
 
-        // Validate and authenticate the user
-        $credentials = $request->only('email', 'password');
-        if (!Auth::attempt($credentials)) {
-            return response()->json(['message' => 'Invalid credentials'], 401);
-        }
-
-        // Create a token for the authenticated user
-        $token = $request->user()->createToken();
-
+        // Generate the token after successful authentication
+        $token = $request->user()->createToken('User Access Token')->plainTextToken;
+ 
         // Return the token in the response
         return response()->json(['token' => $token]);
     }
