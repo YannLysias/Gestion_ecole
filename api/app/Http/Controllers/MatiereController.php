@@ -40,7 +40,7 @@ class MatiereController extends Controller
             'libelle' => $request->libelle,
         ]);
 
-        return response()->json('success', 'Matiere créé avec succès', 201);
+        return response()->json(['success', 'Matiere créé avec succès'], 201);
     }
 
     /**
@@ -74,7 +74,7 @@ class MatiereController extends Controller
 
         $matiere->save();
 
-        return response()->json('success', 'Mofication effectué avec succès', 201);
+        return response()->json(['success', 'Mofication effectué avec succès'], 201);
     }
 
     /**

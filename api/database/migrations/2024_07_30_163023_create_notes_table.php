@@ -17,7 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('matiere_id')->index('notes_matiere_id_foreign');
             $table->unsignedBigInteger('periode_id')->index('notes_periode_id_foreign');
             $table->unsignedBigInteger('controle_id')->index('notes_controle_id_foreign');
-            $table->integer('eleve_id')->index('eleve_id');
+            $table->unsignedBigInteger('eleve_id')->index('eleve_id');
             $table->timestamps();
         });
     }

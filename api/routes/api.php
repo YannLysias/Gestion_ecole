@@ -19,43 +19,43 @@ Route::get('/user', function (Request $request) {
 });
 
 Route::apiResource('tuteurs', TuteurController::class)
-    ->only(['index', 'show', 'update']);
-    // ->middleware(['isauth']);
+    ->only(['index', 'show', 'update'])
+     ->middleware(['auth:sanctum']);
 
 Route::apiResource('admins', AdminController::class) 
     ->only(['index', 'show', 'update'])
-    ->middleware(['isauth']);
+    ->middleware(['auth:sanctum']);
 
 
 Route::apiResource('annee_scolaires', AnneeScolaireController::class)
     ->only(['index','store','show', 'update'])
-    ->middleware(['isauth']);
+    ->middleware(['auth:sanctum']);
 
 
 Route::apiResource('classes', ClasseController::class)
     ->only(['index','store','show', 'update'])
-    ->middleware(['isauth']);
+    ->middleware(['auth:sanctum']);
 
 Route::apiResource('salles', SalleController::class)
     ->only(['index','store','show', 'update'])
-    ->middleware(['isauth']);
+    ->middleware(['auth:sanctum']);
 
 Route::post('users/{id}/toggleStatus', [ToggleStatus::class, 'toggleUserStatus'])
-    ->middleware(['isauth','can.togglestatus']);
+    ->middleware(['auth:sanctum']);
 
 Route::post('salles/linksalletoclasse', [SalleClasseController::class, 'linkSalleToClasse'])
-    ->middleware(['isauth','can.linksalletoclasse']);;
+    ->middleware(['auth:sanctum']);;
 
 Route::apiResource('eleve', EleveController::class)
-    ->middleware(['isauth']);
+    ->middleware(['auth:sanctum']);
 
 Route::apiResource('note', NoteController::class)
-    ->middleware(['isauth']);
+    ->middleware(['auth:sanctum']);
 
 Route::apiResource('matiere', MatiereController::class)
-    ->middleware(['isauth']);
+    ->middleware(['auth:sanctum']);
 
 Route::apiResource('absence', AbsenceController::class)
-    ->middleware(['isauth']);
+    ->middleware(['auth:sanctum']);
 
 require __DIR__.'/auth.php';
