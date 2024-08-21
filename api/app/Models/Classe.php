@@ -11,11 +11,16 @@ class Classe extends Model
 
     public function salles()
     {
-        return $this->belongsToMany(Salle::class);
+        return $this->belongsToMany(Salle::class, 'salle_classe', 'classe_id', 'salle_id');
     }
 
     public function emplois()
     {
         return $this->hasMany(Emploi_du_temps::class, 'classe_id');
+    }
+
+    public function niveaux(){
+
+        return $this->belongsTo(Niveau::class,'niveau_id');
     }
 }

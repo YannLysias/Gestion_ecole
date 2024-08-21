@@ -17,7 +17,7 @@ class TuteurController extends Controller
     public function index(): JsonResponse
     {
         // Récupérer tous les Tuteurs avec leurs utilisateurs associés
-        $tuteurs = Tuteur::with('user')->get();
+        $tuteurs = Tuteur::with('users')->get();
         
         return response()->json(['tuteurs' => $tuteurs], Response::HTTP_OK);
     }
@@ -28,7 +28,7 @@ class TuteurController extends Controller
     public function show(string $id): JsonResponse
     {
         // Récupérer un seul Tuteur avec son utilisateur associé
-        $tuteur = Tuteur::with('user')->find($id); 
+        $tuteur = Tuteur::with('users')->find($id); 
 
         if ($tuteur === null) {
             return response()->json(['message' => 'Tuteur non trouvé'], Response::HTTP_NOT_FOUND);

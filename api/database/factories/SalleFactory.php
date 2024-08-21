@@ -2,22 +2,22 @@
 
 namespace Database\Factories;
 
+use App\Models\Salle;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Controle>
- */
-class ControleFactory extends Factory
+class SalleFactory extends Factory
 {
+    protected $model = Salle::class;
+
     /**
-     * Define the model's default state.
+     * Define the model's default state.SalleSeede
      *
      * @return array<string, mixed>
      */
     public function definition(): array
     {
         return [
-            //
+            'nom' => $this->faker->word(), // Generate a random word for 'nom'
         ];
     }
 }

@@ -2,24 +2,30 @@
 
 namespace Database\Seeders;
 
-use App\Models\Periode;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class PeriodeSeeder extends Seeder
 {
     /**
-     * Run the database seeds.
+     * Seed the application's database.
+     *
+     * @return void
      */
     public function run(): void
     {
-        Periode::firstOrCreate([
-            'code'=>'semestre1',
-            'libelle'=>'1er Semestre'
-        ]);
-        Periode::firstOrCreate([
-            'code'=>'semestre2',
-            'libelle'=>'2em Semestre'
-        ]);
+        
+        $periodes = [
+            ['code' => 'semestre1', 'libelle' => '1er Semestre'],
+            ['code' => 'semestre2', 'libelle' => '2em Semestre'],
+        ];
+
+        
+        foreach ($periodes as $periode) {
+            DB::table('periodes')->updateOrInsert(
+                ['code' => $periode['code']], 
+                ['libelle' => $periode['libelle']] 
+            );
+        }
     }
 }

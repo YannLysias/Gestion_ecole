@@ -61,7 +61,7 @@ class User extends Authenticatable
     {
         return $this->hasOne(Administrateur::class, 'user_id');
     }
-    
+
     public function tuteur()
     {
         return $this->hasOne(Tuteur::class, 'user_id');
@@ -71,5 +71,9 @@ class User extends Authenticatable
     {
         return $this->hasOne(Eleve::class, 'user_id');
     }
-    
+
+    public function document()
+    {
+        return $this->hasMany(Document::class, 'user_id');
+    }
 }

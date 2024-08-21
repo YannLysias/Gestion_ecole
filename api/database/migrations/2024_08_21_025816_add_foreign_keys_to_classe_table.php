@@ -11,10 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('droits', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('libelle');
-            $table->timestamps();
+        Schema::table('classe', function (Blueprint $table) {
+            $table->foreign('niveau_id')->references('id')->on('niveaux')->onDelete('restrict');
         });
     }
 
@@ -23,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('droits');
+        Schema::table('classe', function (Blueprint $table) {
+            $table->dropForeign('niveau_id');
+        });
     }
 };
