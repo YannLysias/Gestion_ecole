@@ -11,9 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('niveaux', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('libelle')->unique();
+        Schema::create('enseignant_classe', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedInteger('enseignant_id');
+            $table->unsignedBigInteger('classe_id');
+            $table->unsignedInteger('matiere_id');
             $table->timestamps();
         });
     }
@@ -23,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('niveaux');
+        Schema::dropIfExists('enseignant_classe');
     }
 };

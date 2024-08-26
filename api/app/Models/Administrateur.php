@@ -16,5 +16,5 @@ class Administrateur extends Model
     
     protected $guarded = [];
 
-    protected $table = 'utilisateurs';
+    protected $table = 'administrateurs';
 }

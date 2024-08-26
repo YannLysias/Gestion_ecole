@@ -6,9 +6,10 @@ use App\Models\Emploi_du_temps;
 use App\Models\Classe;
 use App\Models\Annee_Scolaire;
 use App\Models\Jour;
+use App\Models\Matiere;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class EmploiDuTempsFactory extends Factory
+class Emploi_du_tempsFactory extends Factory
 {
     protected $model = Emploi_du_temps::class;
 
@@ -25,6 +26,7 @@ class EmploiDuTempsFactory extends Factory
             'classe_id' => Classe::inRandomOrder()->first()->id,
             'annee_scolaire_id' => Annee_Scolaire::inRandomOrder()->first()->id,
             'jour_id' => Jour::inRandomOrder()->first()->id,
+            'matiere_id' => Matiere::inRandomOrder()->first()->id,
         ];
     }
 }

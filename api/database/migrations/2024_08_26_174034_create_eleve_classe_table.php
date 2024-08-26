@@ -11,8 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('classe', function (Blueprint $table) {
-            $table->foreign('niveau_id')->references('id')->on('niveaux')->onDelete('restrict');
+        Schema::create('eleve_classe', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('eleve_id');
+            $table->unsignedBigInteger('classe_id');
+            $table->boolean('passe')->default(false);
+            $table->timestamps();
         });
     }
 
@@ -21,8 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('classe', function (Blueprint $table) {
-            $table->dropForeign('niveau_id');
-        });
+        Schema::dropIfExists('eleve_classe');
     }
 };

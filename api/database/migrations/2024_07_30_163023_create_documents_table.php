@@ -15,6 +15,7 @@ return new class extends Migration
             $table->bigIncrements('id');
             $table->string('type');
             $table->unsignedBigInteger('user_id')->index('documents_user_id_foreign');
+            $table->unsignedBigInteger('annee_scolaire_id');
             $table->timestamps();
         });
     }

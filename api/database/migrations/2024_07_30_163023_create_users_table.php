@@ -29,6 +29,7 @@ return new class extends Migration
             $table->rememberToken();
             $table->string('profile_photo_path', 2048)->nullable();
             $table->timestamps();
+            $table->unsignedBigInteger('annee_scolaire_id');
         });
     }
 

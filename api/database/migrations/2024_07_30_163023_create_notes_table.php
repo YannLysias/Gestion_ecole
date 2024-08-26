@@ -14,10 +14,11 @@ return new class extends Migration
         Schema::create('notes', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('note');
-            $table->unsignedBigInteger('matiere_id')->index('notes_matiere_id_foreign');
+            $table->unsignedInteger('matiere_id')->index('notes_matiere_id_foreign');
             $table->unsignedBigInteger('periode_id')->index('notes_periode_id_foreign');
             $table->unsignedBigInteger('controle_id')->index('notes_controle_id_foreign');
             $table->unsignedBigInteger('eleve_id')->index('eleve_id');
+            $table->unsignedBigInteger('annee_scolaire_id');
             $table->timestamps();
         });
     }

@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreign('periode_id')->references('id')->on('periodes')->onUpdate('restrict')->onDelete('restrict');
             $table->foreign('controle_id')->references('id')->on('controles')->onUpdate('restrict')->onDelete('restrict');
             $table->foreign('eleve_id')->references('id')->on('eleves')->onUpdate('restrict')->onDelete('restrict');
+            $table->foreign('annee_scolaire_id')->references('id')->on('annee_scolaires')->onUpdate('restrict')->onDelete('restrict');
         });
     }
 

@@ -15,7 +15,7 @@ return new class extends Migration
             $table->bigIncrements('id');
             $table->date('date');
             $table->unsignedBigInteger('eleve_id')->index('absences_eleve_id_foreign');
-            $table->unsignedBigInteger('matiere_id')->index('absences_matiere_id_foreign');
+            $table->unsignedInteger('matiere_id')->index('absences_matiere_id_foreign');
             $table->timestamps();
         });
     }
