@@ -20,4 +20,8 @@ class Emploi_du_temps extends Model
     {
         return $this->belongsTo(Jour::class, 'jour_id');
     }
+    public function matiere()
+    {
+        return $this->belongsTo(Matiere::class, 'matiere_id');
+    }
 }

@@ -15,6 +15,8 @@ return new class extends Migration
             $table->bigIncrements('id');
             $table->string('nom');
             $table->integer('effectif');
+            $table->unsignedBigInteger('niveau_id');
+            $table->unsignedBigInteger('annee_scolaire_id');
             $table->timestamps();
         });
     }

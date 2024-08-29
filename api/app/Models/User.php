@@ -61,11 +61,24 @@ class User extends Authenticatable
     {
         return $this->hasOne(Administrateur::class, 'user_id');
     }
-    
+
     public function tuteur()
     {
         return $this->hasOne(Tuteur::class, 'user_id');
     }
-    
-    
+
+    public function eleve()
+    {
+        return $this->hasOne(Eleve::class, 'user_id');
+    }
+
+    public function document()
+    {
+        return $this->hasMany(Document::class, 'user_id');
+    }
+
+    public function enseignant()
+    {
+        return $this->hasOne(Enseignant::class, 'user_id');
+    }
 }

@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('administrateurs', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('user_id')->index('utilisateurs_user_id_foreign');
+            $table->unsignedBigInteger('user_id')->index('administrateur_user_id_foreign');
             $table->timestamps();
         });
     }

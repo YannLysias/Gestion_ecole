@@ -54,7 +54,7 @@ class ClasseController extends Controller
     {
         //TODO
 
-        $classe = Classe::with('salles')->find($id);
+        $classe = Classe::with('salles','eleves')->find($id);
 
         if ($classe == null) {
             return response()->json(["message"=>"classe introuvable"],Response::HTTP_NOT_FOUND);

@@ -12,12 +12,14 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('emploi_du_temps', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->increments('id');
             $table->time('heure_debut');
             $table->time('heure_fin');
             $table->timestamps();
-            $table->integer('classe_id')->index('classe_id');
-            $table->integer('annee_scolaire_id')->index('annee_scolaire_id');
+            $table->unsignedBigInteger('classe_id');
+            $table->unsignedBigInteger('annee_scolaire_id');
+            $table->unsignedInteger('jour_id');
+            $table->unsignedInteger('matiere_id');
         });
     }
 

@@ -2,7 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Models\Annee_scolaire;
 use App\Models\User;
+use Database\Factories\EnseignantFactory;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -13,11 +15,26 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        $this->call([
+            AnneeScolaireSeeder::class,
+            ControleSeeder::class,
+            NiveauSeeder::class,
+            ClassSeeder::class,
+            AnneeScolaireSeeder::class,
+            TuteurSeeder::class,
+            ClassSeeder::class,
+            EleveSeeder::class,
+            AministrateurSeeder::class,
+            DocumentSeeder::class,
+            JoursSeeder::class,
+            PeriodeSeeder::class,
+            PermissionSeeder::class,
+            MatiereSeeder::class,
+            NoteSeeder::class,
+            SalleSeeder::class,
+            EmploiDuTempsSeeder::class,
+            EnseignantSeeder::class
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
         ]);
     }
 }

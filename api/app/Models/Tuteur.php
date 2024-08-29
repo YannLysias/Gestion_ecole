@@ -9,7 +9,11 @@ class Tuteur extends Model
 {
     use HasFactory;
 
-    public function user()
+    protected $fillable = [
+        'user_id'
+    ];
+
+    public function users()
 {
     return $this->belongsTo(User::class, 'user_id');
 }

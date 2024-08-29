@@ -4,19 +4,20 @@ use App\Http\Controllers\Auth\AuthenticatedUserController;
 use App\Http\Controllers\Auth\EmailVerificationNotificationController;
 use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
+use App\Http\Controllers\Auth\RegisteredStudentController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('creer-admin', [UserController::class, 'creer_admin']);
-
+                  
 Route::post('register', [RegisteredUserController::class, 'store'])
-                 ->middleware('guest')
-                ->name('register')->middleware('role:admin');
+                ->middleware('guest')
+                ->name('register');
 
 Route::post('login', [AuthenticatedUserController::class, 'store'])
-                ->middleware('guest')
+                 ->middleware('guest')
                 ->name('login');
 
 Route::post('forgot-password', [PasswordResetLinkController::class, 'store'])
@@ -35,7 +36,7 @@ Route::post('email/verification-notification', [EmailVerificationNotificationCon
                 ->middleware(['auth', 'throttle:6,1'])
                 ->name('verification.send');
 
-Route::post('logout', [AuthenticatedUserController::class, 'destroy'])
+Route::get('logout', [AuthenticatedUserController::class, 'destroy'])
                 ->middleware('auth:sanctum')
                 ->name('logout');
 

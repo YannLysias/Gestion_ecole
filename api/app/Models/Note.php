@@ -14,11 +14,11 @@ class Note extends Model
 
     public function matieres()
     {
-        return $this->belongsTo(Matiere::class);
+        return $this->belongsTo(Matiere::class, 'matiere_id');
     }
 
     public function eleves()
     {
-        return $this->belongsTo(Eleve::class); 
+        return $this->belongsTo(Eleve::class, 'eleve_id'); 
     }
 }

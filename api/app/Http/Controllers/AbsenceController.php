@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Absence;
 use Illuminate\Http\Request;
 
 class AbsenceController extends Controller
-{
+{ 
     /**
      * Display a listing of the resource.
      */
@@ -16,13 +17,7 @@ class AbsenceController extends Controller
         return view('absences.index', compact('absences'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
+   
 
     /**
      * Store a newly created resource in storage.
@@ -57,13 +52,7 @@ class AbsenceController extends Controller
         return view('absences.show', compact('absence'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
+    
 
     /**
      * Update the specified resource in storage.
@@ -85,10 +74,12 @@ class AbsenceController extends Controller
             $absence->save();
 
         return response()->json('success', 'Modification effectué avec success');
+        }
 
     /**
      * Remove the specified resource from storage.
      */
+    
     public function destroy(string $id)
     {
         $absence = Absence::findOrFail($id);

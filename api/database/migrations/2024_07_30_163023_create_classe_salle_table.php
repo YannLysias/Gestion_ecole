@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('classe_salle', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('classe_id')->index('classe_salle_classe_id_foreign');
+            $table->unsignedBigInteger('classe_id')->index('classe_classe_salle_id_foreign');
             $table->unsignedBigInteger('salle_id')->index('classe_salle_salle_id_foreign');
             $table->timestamps();
         });

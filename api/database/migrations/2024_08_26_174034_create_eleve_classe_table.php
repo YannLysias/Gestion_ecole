@@ -11,10 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('emploi_du_temps_jours', function (Blueprint $table) {
+        Schema::create('eleve_classe', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('emploi_du_temps_id')->index('emploi_du_temps_jours_emploi_du_temps_id_foreign');
-            $table->unsignedBigInteger('jour_id')->index('emploi_du_temps_jours_jour_id_foreign');
+            $table->unsignedBigInteger('eleve_id');
+            $table->unsignedBigInteger('classe_id');
+            $table->boolean('passe')->default(false);
             $table->timestamps();
         });
     }
@@ -24,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('emploi_du_temps_jours');
+        Schema::dropIfExists('eleve_classe');
     }
 };

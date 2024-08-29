@@ -20,13 +20,7 @@ class EleveController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
+   
 
     /**
      * Store a newly created resource in storage.
@@ -50,8 +44,7 @@ class EleveController extends Controller
 
         $path_photo = Storage::putFile('public/photos', $request->photo);
         $path_photo_convert_to_table = explode('/', $path_photo);
-        if($request->has('photo'))
-        {
+        if ($request->has('photo')) {
             $path_photo = Storage::putFile('public/photos', $request->photo);
             $path_photo_convert_to_table = explode('/', $path_photo);
         }
@@ -71,7 +64,7 @@ class EleveController extends Controller
             'tuteur_id' => $request->tuteur_id,
         ]);
 
-        return response()->json('success', 'Compte éleve créé avec succès', 201);
+        return response()->json(['success', 'Compte éleve créé avec succès'], 201);
     }
 
     /**
@@ -80,15 +73,8 @@ class EleveController extends Controller
     public function show(string $id)
     {
         $user = Eleve::findOrFail($id);
-
     }
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
+    
 
     /**
      * Update the specified resource in storage.
@@ -110,39 +96,29 @@ class EleveController extends Controller
             'photo' => 'nullable|image',
         ]);
 
-        $path_photo = Storage::putFile('public/photos', $request->photo);
-        $path_photo_convert_to_table = explode('/', $path_photo);
-        if($request->has('photo'))
-        {
+        if ($request->has('photo')) {
             $path_photo = Storage::putFile('public/photos', $request->photo);
             $path_photo_convert_to_table = explode('/', $path_photo);
         }
 
         $eleve = Eleve::where('id', (int) $id)->first();
+        $eleve->matricule = $request->nom;
+        $eleve->edumaster = $request->edumaster;
+        $eleve->nom = $request->nom;
+        $eleve->prenom = $request->prenom;
+        $eleve->sexe = $request->sexe;
+        $eleve->date_naissance = $request->date_naissance;
+        $eleve->lieu_naissance = $request->lieu_naissance;
+        $eleve->adresse = $request->adresse;
+        $eleve->statut = $request->statut;
+        $eleve->classe_id = $request->classe_id;
+        $eleve->tuteur_id = $request->tuteur_id;
+        $eleve->photo = $request->photo ? $request->photo : null;
 
-            $eleve ->matricule = $request->nom;
-            $eleve ->edumaster= $request->edumaster;
-            $eleve ->nom= $request->nom;
-            $eleve ->prenom= $request->prenom;
-            $eleve ->sexe= $request->sexe;
-            $eleve ->date_naissance= $request->date_naissance;
-            $eleve ->lieu_naissance= $request->lieu_naissance;
-            $eleve ->adresse= $request->adresse;
-            $eleve ->statut= $request->statut;
-            $eleve ->classe_id= $request->classe_id;
-            $eleve ->tuteur_id= $request->tuteur_id;
-            $eleve->photo = $request->photo ? $request->photo : null;
+        $eleve->save();
 
-            $eleve->save();
-
-            return response()->json('Modification effectué avec succès');
+        return response()->json('Modification effectué avec succès');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
 
-    }
 }

@@ -5,12 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\Tuteur;
 use App\Models\User;
-use App\Models\Utilisateur;
-use Illuminate\Auth\Events\Registered;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 
@@ -24,7 +19,6 @@ class RegisteredUserController extends Controller
     public function store(Request $request)
     {
 
-        //  return response()->json('Compte admin créé avec succès', 201); // Code de réponse HTTP 201
 
         $request->validate([
             'nom' => ['required', 'string', 'max:255'],
@@ -38,29 +32,14 @@ class RegisteredUserController extends Controller
         $user = User::create([
             'nom' => $request->nom,
             'prenom' => $request->prenom,
+            'telephone' => $request->telephone,
             'user_name' => strtolower(trim($request->nom)) . strtolower(trim($request->nom)) . substr(time(), -4),
             'sexe' => $request->sexe,
             'email' => $request->email ? $request->email : null ,
             'password' => Hash::make($request->password),
         ]);
 
-
         
-        $user->assignRole('tuteur');
-
-        if ($request->role == 'admin') {
-            $Utilisateur = Utilisateur::create([
-                'nom' => 'KPEDJO',
-                'prenom' => 'Guy',
-                'sexe' => 'Masculin',
-                'telephone' => '0022954103099',
-                'role' => 'admin',
-                'user_name' => 'Gkpedjo0229',
-                'email' => 'gkpedjo@gmail.com',
-                'password' => 'original22',
-
-            ]);
-        }
 
 
         $tuteur = Tuteur::create([
@@ -69,7 +48,7 @@ class RegisteredUserController extends Controller
 
         $tuteurWithUser = Tuteur::with('user')->find($tuteur->id);
         
-        event(new Registered($user));
+        // event(new Registered($user));
 
         // Return a response with the created user
         return response()->json([

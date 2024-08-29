@@ -11,10 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('administrateur_droit', function (Blueprint $table) {
+        Schema::create('niveaux', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('administrateur_id')->index('administrateur_droit_administrateur_id_foreign');
-            $table->unsignedBigInteger('droit_id')->index('administrateur_droit_droit_id_foreign');
+            $table->string('libelle')->unique();
             $table->timestamps();
         });
     }
@@ -24,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('administrateur_droit');
+        Schema::dropIfExists('niveaux');
     }
 };
