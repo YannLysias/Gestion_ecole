@@ -20,7 +20,7 @@ class Absence extends Model
 
     public function eleve()
     {
-        return $this->belongsTo(Ecole::class);
+        return $this->belongsTo(Eleve::class);
     }
 
 

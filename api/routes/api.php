@@ -11,6 +11,7 @@ use App\Http\Controllers\TuteurController;
 use App\Http\Controllers\EleveController;
 use App\Http\Controllers\NoteController;
 use App\Http\Controllers\MatiereController;
+use App\Http\Controllers\NiveauxController;
 use App\Http\Controllers\StatistiqueController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -54,5 +55,8 @@ Route::apiResource('matiere', MatiereController::class);
 Route::apiResource('absence', AbsenceController::class);
 
 Route::get('statistiques',StatistiqueController::class);
+
+Route::apiResource('niveaux',NiveauxController::class)
+      ->only('index','show');
 
 require __DIR__ . '/auth.php';

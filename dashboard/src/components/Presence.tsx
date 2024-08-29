@@ -1,7 +1,10 @@
 import React from 'react'
+import PageHeader from './PageHeader'
 
 export default function Presence() {
   return (
-    <div>Presence</div>
+    <div><PageHeader breadcumb={[{text:'Presence',link:"/dashboard/presence"}]}/></div>
+
+    
   )
 }

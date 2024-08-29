@@ -1,45 +1,45 @@
 import { UserGroupIcon } from "@heroicons/react/24/outline"
 import { CheckCircle2, GraduationCap, LayoutDashboard, LogOutIcon, School, Settings, Shield } from "lucide-react"
-import { NavLink, Outlet, useLocation } from "react-router-dom"
+import { Link, NavLink, Outlet, useLocation } from "react-router-dom"
 
 const adminNavitems = [
     {
         link: '/dashboard',
         icon: <LayoutDashboard />,
-        name: 'Dashboard'
+        name: 'Tableau de bord'
     },
     {
-        link: '/dashboard/classe',
-        icon: <School/>,
+        link: '/dashboard/niveau',
+        icon: <School />,
         name: 'Classes',
-        
+
     },
     {
         link: '/dashboard/admin',
         icon: <Shield />,
-        name: 'Administrators'
+        name: 'Administrateurs'
     },
     {
         link: '/dashboard/tuteur',
         icon: <UserGroupIcon />,
-        name: 'Tutors',
-        style:'size-8'
+        name: 'Tuteurs',
+        style: 'size-8'
     },
     {
         link: '/dashboard/eleve',
         icon: <GraduationCap />,
-        name: 'Students'
+        name: 'Eleves'
     },
 
     {
         link: '/dashboard/presence',
         icon: <CheckCircle2 />,
-        name: 'Attendence'
+        name: 'Presence'
     },
 
 ]
 const tutorNavItems = [
-    
+
 ]
 
 export function AdminSideNavItem() {
@@ -65,18 +65,24 @@ export function eleveSideNavItem() {
 export default function SideNav() {
     const activeLocation = useLocation()
     const navItems = adminNavitems
-
+    console.log(activeLocation.pathname)
+    let isActive = false
 
     return (
         <div className="flex">
             <div className="h-screen flex flex-col justify-between text-lg font-normal pl-4 pb-4 w-[280px] max-w-[300px] bg-green-800 text-white">
                 <div>
-                    <div className="pt-4 pb-14 flex gap-2 items-center"><School /><span>My School</span></div>
+                    <Link to='/' className="pt-4 pb-14 flex gap-2 items-center"><School /><span>My School</span></Link>
                     <ul className="flex flex-col gap-2 pr-4 text-white">
                         {navItems.map((item, index) => {
-                            const isActive = activeLocation.pathname == item.link ? true : false
+                            const isActive = 
+                            activeLocation.pathname === item.link || 
+                            (activeLocation.pathname.startsWith(item.link) && item.link !== '/dashboard');
+                            
+                            console.log("isActive", isActive, activeLocation.pathname)
                             return (
-                                <NavLink to={item.link} key={index} className={isActive ? "flex items-center gap-x-2 px-2 py-1 hover:bg-yellow-400 bg-yellow-400 hover:text-black rounded-sm text-black" : "flex items-center gap-x-2 px-2 py-1 hover:bg-yellow-400 hover:text-black rounded-sm"}>
+                                <NavLink to={item.link} key={index} className={isActive ? "flex items-center gap-x-2 px-2 py-1 hover:bg-yellow-400 bg-yellow-400 hover:text-black rounded-sm text-black" :
+                                    "flex items-center gap-x-2 px-2 py-1 hover:bg-yellow-400 hover:text-black rounded-sm"}>
                                     <span className={item?.style}>{item.icon}</span> <span>{item.name}</span>
                                 </NavLink>
                             )
@@ -88,7 +94,7 @@ export default function SideNav() {
                     <div className="flex gap-2 items-center"><Settings /> <span>Parametre</span></div>
                 </div>
             </div>
-            <div className="pl-4 pt-2 bg-gray-200 w-full">
+            <div className="p-6 bg-gray-200 w-full sm:max-h-screen overflow-y-auto">
                 <Outlet />
             </div>
         </div>

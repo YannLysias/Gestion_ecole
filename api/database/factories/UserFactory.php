@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Annee_scolaire;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
@@ -32,7 +33,9 @@ class UserFactory extends Factory
             'statut' => $this->faker->boolean(),
             'email' => $this->faker->unique()->safeEmail(),
             'password' => static::$password ??= Hash::make('password'),
-            'remember_token' => Str::random(10)
+            'remember_token' => Str::random(10),
+            'annee_scolaire_id'=>Annee_scolaire::inRandomOrder()->first()->id,
+
         ];
     }
 

@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Annee_scolaire;
 use App\Models\Classe;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\DB;
@@ -33,6 +34,7 @@ class ClasseFactory extends Factory
             'nom' => $niveauLibelle . $nextLetter,
             'effectif' => $this->faker->numberBetween(20, 40),
             'niveau_id' => $niveauId,
+            'annee_scolaire_id'=>Annee_scolaire::inRandomOrder()->first()->id,
         ];
     }
 }

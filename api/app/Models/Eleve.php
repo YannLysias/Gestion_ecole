@@ -26,4 +26,8 @@ class Eleve extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+    public function classes()
+    {
+        return $this->belongsToMany(Classe::class, 'eleve_classe','classe_id','eleve_id');
+    }
 }

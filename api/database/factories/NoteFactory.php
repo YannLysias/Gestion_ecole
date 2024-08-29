@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Annee_scolaire;
 use App\Models\Note;
 use App\Models\Matiere;
 use App\Models\Periode; 
@@ -26,6 +27,8 @@ class NoteFactory extends Factory
             'periode_id' => Periode::inRandomOrder()->first()->id, 
             'controle_id' => Controle::inRandomOrder()->first()->id, 
             'eleve_id' => Eleve::inRandomOrder()->first()->id,
+            'annee_scolaire_id'=>Annee_scolaire::inRandomOrder()->first()->id,
+
         ];
     }
 }

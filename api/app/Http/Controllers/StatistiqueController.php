@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Eleve;
+use App\Models\Enseignant;
 use App\Models\Tuteur;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -11,42 +12,64 @@ use Illuminate\Http\Response;
 class StatistiqueController extends Controller
 {
 
-    public function __invoke(){
-       
+    public function __invoke()
+    {
+
         $eleveGarcon = Eleve::with('users')
-        ->whereHas('users', function($query) {
-            $query->where('sexe', 'masculin');
-        })->count();
+            ->whereHas('users', function ($query) {
+                $query->where('sexe', 'male');
+            })->count();
 
         $eleveFille = Eleve::with('users')
-        ->whereHas('users', function($query) {
-            $query->where('sexe', 'feminin');
-        })
-        ->count();
+            ->whereHas('users', function ($query) {
+                $query->where('sexe', 'female');
+            })
+            ->count();
 
         $elevePassant = 0;
 
         $eleveRedoublant = 0;
 
         $eleve = [
-        'eleveGarcon' => $eleveGarcon, 
-        'eleveFille' => $eleveFille, 
-        'elevePassant' => $elevePassant, 
-        'eleveRedoublant' => $eleveRedoublant];
+            'gacons' => $eleveGarcon,
+            'filles' => $eleveFille,
+            'passants' => $elevePassant,
+            'redoublants' => $eleveRedoublant
+        ];
 
-        $tuteur = Tuteur::with('users')->whereHas('users', function($query) {
-            $query->where('sexe', 'masculin');
+        $tuteurHomme = Tuteur::with('users')->whereHas('users', function ($query) {
+            $query->where('sexe', 'male');
         })->count();
 
-        $tuteurFille = Tuteur::with('users')->whereHas('users', function($query) {
-            $query->where('sexe', 'feminin');
+        $tuteurFemme = Tuteur::with('users')->whereHas('users', function ($query) {
+            $query->where('sexe', 'female');
         })->count();
 
         $tuteur = [
-        'tuteurGarcon' => $tuteur, 
-        'tuteurFille' => $tuteurFille, 
+            'hommes' => $tuteurHomme,
+            'femmes' => $tuteurFemme,
         ];
 
-        return response()->json(['statistiques' => ['eleves' => $eleve, 'tuteurs' => $tuteur]], Response::HTTP_OK);
+        $enseignantHomme = Enseignant::with('users')->whereHas('users', function ($query) {
+            $query->where('sexe', 'male');
+        })->count();
+
+        $enseignantFemme = Enseignant::with('users')->whereHas('users', function ($query) {
+            $query->where('sexe', 'female');
+        })->count();
+
+        $enseignant = [
+            'hommes' => $enseignantHomme,
+            'femmes' => $enseignantFemme,
+        ];
+
+        return response()->json(
+            ['statistiques' => [
+                'eleves' => $eleve,
+                'tuteurs' => $tuteur,
+                'enseignant' => $enseignant
+            ]],
+            Response::HTTP_OK
+        );
     }
 }
